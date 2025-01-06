@@ -6,12 +6,27 @@ import { Component, OnInit } from '@angular/core';
   styleUrl: './app.component.scss',
 })
 export class AppComponent implements OnInit {
-  title = 'scan-app';
-  nav!: Navigator | any;
+  ws!:WebSocket;
+  imgSrc:string= "";
+
   ngOnInit(): void {
-    this.nav = navigator;
-    this.nav.usb.getDevices().then((d:any) => {
-      console.log(d)
-    });
+    this.initWebSocket();
+  }
+
+  initWebSocket(){
+    this.ws = new WebSocket('ws://localhost:8181/');
+    this.ws.onmessage = (e)=> {
+      if (e.data instanceof Blob) {
+        let imgBlob = e.data;
+        this.imgSrc = URL.createObjectURL(imgBlob);
+      }
+      else{
+        console.log("Invalid format");
+      }
+    }
+  }
+
+  openScanApp(){
+    this.ws.send("1100");
   }
 }
