@@ -7,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AppComponent implements OnInit {
   ws!:WebSocket;
-  imgSrc:string= "";
+  imgSrc:string= "https://lh6.googleusercontent.com/proxy/2ED4oOCWyMqtoafYCIDVXJVrpt8slFG_bBC03YxaZQfa6I-XxyEjuY68hUM7KkGAhHaXhnHrJ5P0MDVlZx8iEoYjDmi-TXIMG16UaJc";
 
   ngOnInit(): void {
     this.initWebSocket();
